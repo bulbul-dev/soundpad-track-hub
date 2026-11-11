@@ -30,6 +30,7 @@ namespace SoundpadTrackHub.Models
         Downloads,
         Settings,
         Security,
+        Replace,
     }
 
     public sealed record DownloadProgressInfo(string Id, string FileName, long Received, long? Total, bool IsFinished);

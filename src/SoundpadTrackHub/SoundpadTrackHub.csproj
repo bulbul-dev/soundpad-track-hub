@@ -15,7 +15,7 @@
     <Product>Soundpad Track Hub</Product>
     <Company>Soundpad Track Hub</Company>
     <Description>Companion-панель для Soundpad: поиск и загрузка MP3 через сайт Hitmoz во встроенном WebView2.</Description>
-    <Version>2.0.1</Version>
+    <Version>2.1.0</Version>
     <InvariantGlobalization>false</InvariantGlobalization>
     <SatelliteResourceLanguages>ru;en</SatelliteResourceLanguages>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>

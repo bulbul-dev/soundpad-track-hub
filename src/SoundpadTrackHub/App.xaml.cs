@@ -121,7 +121,11 @@ namespace SoundpadTrackHub
             settingsVm.UninstallRequested += (_, _) => RunUninstall();
             var searchVm = new SearchViewModel();
             var volumeVm = new SoundpadVolumeViewModel(volumeController);
-            _mainVm = new MainViewModel(_settings, _shell, downloadsVm, settingsVm, searchVm, volumeVm);
+            var replacer = new SoundpadTrackReplacer(
+                new SoundpadSoundList(SoundpadSoundList.DefaultListPath, System.IO.Path.Combine(_paths.DataDirectory, "soundpad-backups")),
+                locator, _dialogs);
+            var replaceVm = new ReplaceViewModel(history, replacer);
+            _mainVm = new MainViewModel(_settings, _shell, downloadsVm, settingsVm, searchVm, volumeVm, replaceVm);
             var mainVm = _mainVm;
 
             async Task SyncSoundpadAsync(bool report)
@@ -180,7 +184,7 @@ namespace SoundpadTrackHub
             };
             _companion = new CompanionWindowController(_window, _watcher, _settings, startHiddenUntilSoundpad: startedByAutostart)
             {
-                SuppressHide = () => volumeController.IsRestartingSoundpad,
+                SuppressHide = () => volumeController.IsRestartingSoundpad || replacer.IsRestartingSoundpad,
             };
 
             _tray = new TrayIcon(

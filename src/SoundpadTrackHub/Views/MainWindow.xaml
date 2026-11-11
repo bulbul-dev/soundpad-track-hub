@@ -148,9 +148,17 @@
                             </StackPanel>
                         </RadioButton>
                         <RadioButton Style="{StaticResource SegmentRadio}" GroupName="Pages" Padding="4,5"
+                                     ToolTip="Заменить трек в Soundpad (для бесплатной версии)"
+                                     IsChecked="{Binding CurrentPage, Converter={StaticResource EnumEq}, ConverterParameter=Replace}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource Icon}" Text="&#xE8AB;" FontSize="12" Margin="0,0,5,0" />
+                                <TextBlock Text="Замена" />
+                            </StackPanel>
+                        </RadioButton>
+                        <RadioButton Style="{StaticResource SegmentRadio}" GroupName="Pages" Padding="4,5" ToolTip="Настройки"
                                      IsChecked="{Binding CurrentPage, Converter={StaticResource EnumEq}, ConverterParameter=Settings}">
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Style="{StaticResource Icon}" Text="&#xE713;" FontSize="12" Margin="0,0,6,0" />
+                                <TextBlock Style="{StaticResource Icon}" Text="&#xE713;" FontSize="12" Margin="0,0,5,0" />
                                 <TextBlock Text="Настройки" />
                             </StackPanel>
                         </RadioButton>
@@ -274,6 +282,10 @@
                 <!-- Загрузки -->
                 <views:DownloadsPage DataContext="{Binding Downloads}"
                                      Visibility="{Binding DataContext.IsDownloadsPage, ElementName=Root, Converter={StaticResource BoolToVis}}" />
+
+                <!-- Замена трека в Soundpad -->
+                <views:ReplacePage DataContext="{Binding Replace}"
+                                   Visibility="{Binding DataContext.IsReplacePage, ElementName=Root, Converter={StaticResource BoolToVis}}" />
 
                 <!-- Настройки -->
                 <views:SettingsPage Visibility="{Binding IsSettingsPage, Converter={StaticResource BoolToVis}}" />

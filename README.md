@@ -60,6 +60,7 @@ Windows SmartScreen может предупредить «Неизвестный
 | **Подтверждение** | «Скачать этот MP3 с Hitmoz? Проверьте права использования трека.» с именем файла, ссылкой и папкой |
 | **Без перезаписи** | если файл уже есть, можно выбрать «Сохранить копию», «Заменить» или «Отмена» |
 | **Временные файлы** | файл сначала скачивается в `%TEMP%\SoundpadTrackHub`; при отмене или ошибке временный файл удаляется |
+| **Замена трека (бесплатный Soundpad)** | вкладка «Замена»: выберите скачанный трек и звук Soundpad, который он заменит — номер, категория и горячая клавиша сохраняются |
 | **Перетаскивание в Soundpad** | карточку скачанного трека можно перетащить прямо в список звуков Soundpad |
 | **Прилипание к Soundpad** | окно справа от Soundpad, если места нет — слева; следует за Soundpad, прячется при его сворачивании или закрытии |
 | **Предпрослушивание и громкая копия (NAudio)** | прослушивание скачанных файлов со своим ползунком громкости; отдельная копия +6 dB с limiter'ом |
@@ -176,6 +177,20 @@ Track Hub откроет во встроенном браузере штатну
 - уже добавленные треки повторно не добавляются (проверяется путь файла в категории);
 - кнопка «Добавить все скачанные сейчас» и переключатель находятся в «Настройки → Soundpad и Windows»;
 - удалённое управление доступно в полной версии Soundpad (не в демо).
+
+### Замена трека — для бесплатной версии Soundpad
+
+В бесплатной (демо) версии Soundpad нет удалённого управления, поэтому новые треки нельзя добавить автоматически.
+Для этого есть вкладка **«Замена»**:
+
+1. Нажмите **«Поменять»** у скачанного трека.
+2. Выберите в списке звук Soundpad, который хотите заменить (есть поиск по названию и категории).
+3. Подтвердите. Если Soundpad открыт, Track Hub закроет его обычным способом, заменит трек и сразу запустит снова.
+
+Звук остаётся на своём месте: номер, категория и горячая клавиша не меняются, меняется только файл, который он играет.
+Старый аудиофайл не удаляется. Перед каждой заменой Track Hub сохраняет копию списка Soundpad
+(`%APPDATA%\SoundpadTrackHub\soundpad-backups`, последние 15). Чтобы откатить замену, закройте Soundpad и скопируйте
+нужную копию поверх `%APPDATA%\Leppsoft\soundlist.spl`.
 
 ### Громкость Soundpad
 
@@ -296,12 +311,13 @@ src/SoundpadTrackHub/
   Integration/     SoundpadLocator, SoundpadWatcher (WinEvent out-of-context), DockPlacementCalculator,
                    WindowDocker, CompanionWindowController, HitmozWebViewController (WebView2, поиск),
                    SoundpadRemoteClient (sp_remote_control), SoundpadLibrarySync (категория),
-                   SoundpadRegistryStore + SoundpadVolumeController (нормализация громкости)
+                   SoundpadRegistryStore + SoundpadVolumeController (нормализация громкости),
+                   SoundpadSoundList + SoundpadTrackReplacer (замена трека через soundlist.spl)
   ViewModels/      MainViewModel, SearchViewModel, DownloadsViewModel, SettingsViewModel, SoundpadVolumeViewModel
-  Views/           MainWindow, SearchPage, DownloadsPage, SettingsPage, SecurityPage, SoundpadVolumeSwitch,
+  Views/           MainWindow, SearchPage, DownloadsPage, ReplacePage, SettingsPage, SecurityPage, SoundpadVolumeSwitch,
                    DialogWindow/DialogService, TrayIcon
   Themes/          Colors.xaml, Controls.xaml — тёмная тема без системных белых элементов
-tests/SoundpadTrackHub.Tests/  xUnit, 100 тестов
+tests/SoundpadTrackHub.Tests/  xUnit, 105 тестов
 scripts/install.ps1
 ```
 

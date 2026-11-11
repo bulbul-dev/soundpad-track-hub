@@ -28,11 +28,12 @@ namespace SoundpadTrackHub.ViewModels
 
         public const string DragHint = "Перетащите скачанный файл в список звуков Soundpad";
 
-        public MainViewModel(ISettingsService settings, ShellService shell, DownloadsViewModel downloads, SettingsViewModel settingsPage, SearchViewModel search, SoundpadVolumeViewModel volume)
+        public MainViewModel(ISettingsService settings, ShellService shell, DownloadsViewModel downloads, SettingsViewModel settingsPage, SearchViewModel search, SoundpadVolumeViewModel volume, ReplaceViewModel replace)
         {
             _settings = settings;
             _shell = shell;
             Downloads = downloads;
+            Replace = replace;
             SettingsPage = settingsPage;
             Search = search;
             Volume = volume;
@@ -82,6 +83,8 @@ namespace SoundpadTrackHub.ViewModels
 
         public SoundpadVolumeViewModel Volume { get; }
 
+        public ReplaceViewModel Replace { get; }
+
         public string Title => "Hitmoz • Soundpad";
 
         // ---------- Навигация ----------
@@ -98,9 +101,11 @@ namespace SoundpadTrackHub.ViewModels
                     OnPropertyChanged(nameof(IsDownloadsPage));
                     OnPropertyChanged(nameof(IsSettingsPage));
                     OnPropertyChanged(nameof(IsSecurityPage));
+                    OnPropertyChanged(nameof(IsReplacePage));
                     OnPropertyChanged(nameof(IsWebViewVisible));
                     OnPropertyChanged(nameof(IsBrowserErrorVisible));
                     if (value == AppPage.Downloads) Downloads.Refresh();
+                    if (value == AppPage.Replace) Replace.Refresh();
                 }
             }
         }
@@ -114,6 +119,8 @@ namespace SoundpadTrackHub.ViewModels
         public bool IsSettingsPage => CurrentPage == AppPage.Settings;
 
         public bool IsSecurityPage => CurrentPage == AppPage.Security;
+
+        public bool IsReplacePage => CurrentPage == AppPage.Replace;
 
         // ---------- Soundpad ----------
 
