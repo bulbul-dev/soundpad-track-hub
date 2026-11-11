@@ -18,7 +18,7 @@
 
 #define AppName "Soundpad Track Hub"
 #define AppExe  "SoundpadTrackHub.exe"
-#define AppUrl  "https://github.com/gff107292-commits/soundpad-track-hub"
+#define AppUrl  "https://github.com/bulbul-dev/soundpad-track-hub"
 
 [Setup]
 ; AppId совпадает с именем, которое ожидает встроенное удаление программы (ключ SoundpadTrackHub_is1).
