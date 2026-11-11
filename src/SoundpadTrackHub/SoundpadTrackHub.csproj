@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>SoundpadTrackHub</RootNamespace>
+    <AssemblyName>SoundpadTrackHub</AssemblyName>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>Assets\app.ico</ApplicationIcon>
+    <Product>Soundpad Track Hub</Product>
+    <Company>Soundpad Track Hub</Company>
+    <Description>Companion-панель для Soundpad: поиск и загрузка MP3 через сайт Hitmoz во встроенном WebView2.</Description>
+    <Version>2.0.1</Version>
+    <InvariantGlobalization>false</InvariantGlobalization>
+    <SatelliteResourceLanguages>ru;en</SatelliteResourceLanguages>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <!-- WFAC010: DPI для WPF задаётся в app.manifest (PerMonitorV2), это корректно. -->
+    <NoWarn>$(NoWarn);WFAC010</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2903.40" />
+    <PackageReference Include="NAudio" Version="2.2.1" />
+    <PackageReference Include="Serilog" Version="4.2.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\app.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="SoundpadTrackHub.Tests" />
+  </ItemGroup>
+
+</Project>

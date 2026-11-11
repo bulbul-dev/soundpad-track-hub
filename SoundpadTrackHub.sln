@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C91B89C4-FC2D-402F-AEE7-BC66F442CE95}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoundpadTrackHub", "src\SoundpadTrackHub\SoundpadTrackHub.csproj", "{66B128EB-21D9-4248-B870-AA8D18FCC759}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0FD31BE6-579F-4C28-A90A-32978E699EB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoundpadTrackHub.Tests", "tests\SoundpadTrackHub.Tests\SoundpadTrackHub.Tests.csproj", "{26BB4A21-205F-49B2-9631-667AE03D8F22}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{66B128EB-21D9-4248-B870-AA8D18FCC759}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66B128EB-21D9-4248-B870-AA8D18FCC759}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66B128EB-21D9-4248-B870-AA8D18FCC759}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66B128EB-21D9-4248-B870-AA8D18FCC759}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26BB4A21-205F-49B2-9631-667AE03D8F22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26BB4A21-205F-49B2-9631-667AE03D8F22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26BB4A21-205F-49B2-9631-667AE03D8F22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26BB4A21-205F-49B2-9631-667AE03D8F22}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{66B128EB-21D9-4248-B870-AA8D18FCC759} = {C91B89C4-FC2D-402F-AEE7-BC66F442CE95}
+		{26BB4A21-205F-49B2-9631-667AE03D8F22} = {0FD31BE6-579F-4C28-A90A-32978E699EB0}
+	EndGlobalSection
+EndGlobal
