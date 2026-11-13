@@ -29,5 +29,8 @@ namespace SoundpadTrackHub.Services
         bool Confirm(string title, string message, string? detail, string confirmText, string cancelText, bool danger = false);
 
         void Info(string title, string message, string? detail = null, DialogIcon icon = DialogIcon.Info);
+
+        /// <summary>Показывает пользовательское соглашение. true — пользователь его принял.</summary>
+        bool ShowAgreement() => false;
     }
 }

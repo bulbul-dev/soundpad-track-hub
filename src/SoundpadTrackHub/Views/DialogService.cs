@@ -40,6 +40,26 @@ namespace SoundpadTrackHub.Views
             return Choose(title, message, detail, buttons, danger ? DialogIcon.Danger : DialogIcon.Question) == 0;
         }
 
+        public bool ShowAgreement()
+        {
+            var window = new AgreementWindow();
+            var owner = Application.Current?.Windows.OfType<Window>()
+                .FirstOrDefault(w => w.IsVisible && w is not DialogWindow && w is not AgreementWindow && w.WindowState != WindowState.Minimized);
+            if (owner is not null)
+            {
+                window.Owner = owner;
+            }
+            else
+            {
+                window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                window.Topmost = true;
+                window.ShowInTaskbar = true;
+            }
+
+            window.ShowDialog();
+            return window.Accepted;
+        }
+
         public void Info(string title, string message, string? detail = null, DialogIcon icon = DialogIcon.Info)
         {
             Choose(title, message, detail, new[] { new DialogButton("OK", DialogButtonKind.Primary) }, icon);

@@ -99,28 +99,7 @@
                 </StackPanel>
             </Grid>
 
-            <!-- ================= Панель действий ================= -->
-            <Grid Grid.Row="1" Margin="12,2,12,10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-
-                <Button Style="{StaticResource HeroButton}" Command="{Binding OpenHitmozCommand}" HorizontalContentAlignment="Center"
-                        ToolTip="Открыть главную страницу ru.hitmoz.org во встроенном браузере">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Style="{StaticResource Icon}" Text="&#xE774;" FontSize="15" Margin="0,0,9,0" />
-                        <TextBlock Text="Открыть Hitmoz" VerticalAlignment="Center" />
-                    </StackPanel>
-                </Button>
-
-                <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="8,0,0,0">
-                    <Button Style="{StaticResource IconButton}" Width="40" Height="40" Content="&#xE72B;" ToolTip="Назад"
-                            Command="{Binding BackCommand}" />
-                    <Button Style="{StaticResource IconButton}" Width="40" Height="40" Content="&#xE72C;" ToolTip="Обновить страницу"
-                            Command="{Binding ReloadCommand}" />
-                </StackPanel>
-            </Grid>
+            <!-- Сайт в программе не показывается: только поиск и скачивание. -->
 
             <!-- ================= Вкладки + карточка загрузки ================= -->
             <StackPanel Grid.Row="2" Margin="12,0,12,8">
@@ -131,13 +110,6 @@
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Style="{StaticResource Icon}" Text="&#xE721;" FontSize="12" Margin="0,0,6,0" />
                                 <TextBlock Text="Поиск" />
-                            </StackPanel>
-                        </RadioButton>
-                        <RadioButton Style="{StaticResource SegmentRadio}" GroupName="Pages" Padding="4,5"
-                                     IsChecked="{Binding CurrentPage, Converter={StaticResource EnumEq}, ConverterParameter=Browser}">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Style="{StaticResource Icon}" Text="&#xE774;" FontSize="12" Margin="0,0,6,0" />
-                                <TextBlock Text="Сайт" />
                             </StackPanel>
                         </RadioButton>
                         <RadioButton Style="{StaticResource SegmentRadio}" GroupName="Pages" Padding="4,5"
@@ -220,60 +192,11 @@
             <!-- ================= Содержимое ================= -->
             <Grid Grid.Row="3" Margin="12,0,12,0">
 
-                <!-- Сайт Hitmoz (WebView2) -->
-                <Grid Visibility="{Binding IsBrowserPage, Converter={StaticResource BoolToVis}}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="3" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <ProgressBar Grid.Row="0" Height="2" IsIndeterminate="{Binding IsBrowserLoading, Mode=OneWay}"
-                                 Visibility="{Binding IsBrowserLoading, Converter={StaticResource BoolToVis}}" />
-                    <Border Grid.Row="1" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" CornerRadius="8"
-                            Background="{StaticResource SurfaceBrush}" Padding="1"
-                            Visibility="{Binding IsWebViewVisible, Converter={StaticResource BoolToVis}}">
-                        <wv2:WebView2 x:Name="WebView" DefaultBackgroundColor="#FF1E2128" />
-                    </Border>
-
-                    <!-- Честный экран ошибки: без демо-треков и подмены сайта -->
-                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto"
-                                  Visibility="{Binding IsBrowserErrorVisible, Converter={StaticResource BoolToVis}}">
-                        <Border Style="{StaticResource Card}" Padding="20,24" VerticalAlignment="Top" Margin="0,8,0,8">
-                            <StackPanel>
-                                <Border Width="48" Height="48" CornerRadius="24" Background="{StaticResource WarningSoftBrush}" HorizontalAlignment="Left">
-                                    <TextBlock Style="{StaticResource Icon}" Text="{Binding BrowserErrorGlyph}" FontSize="22"
-                                               Foreground="{StaticResource WarningBrush}" HorizontalAlignment="Center" />
-                                </Border>
-                                <TextBlock Margin="0,14,0,0" Style="{StaticResource PageTitle}" FontSize="17" Text="{Binding BrowserErrorTitle}" TextWrapping="Wrap" />
-                                <TextBlock Margin="0,4,0,0" Style="{StaticResource Caption}" FontSize="12.5" LineHeight="18" Text="{Binding BrowserErrorText}" />
-
-                                <Button Margin="0,18,0,0" Style="{StaticResource PrimaryButton}" MinHeight="36" HorizontalAlignment="Stretch"
-                                        Command="{Binding OpenExternalCommand}">
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Style="{StaticResource Icon}" Text="&#xE8A7;" Margin="0,0,8,0" />
-                                        <TextBlock Text="Открыть Hitmoz во внешнем браузере" />
-                                    </StackPanel>
-                                </Button>
-                                <Button Margin="0,8,0,0" MinHeight="34" HorizontalAlignment="Stretch" Command="{Binding GetWebView2Command}"
-                                        Visibility="{Binding IsRuntimeMissing, Converter={StaticResource BoolToVis}}"
-                                        Content="Скачать WebView2 Runtime с сайта Microsoft" />
-                                <UniformGrid Rows="1" Margin="0,8,0,0">
-                                    <Button MinHeight="34" Margin="0,0,4,0" Command="{Binding RetryCommand}">
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Style="{StaticResource Icon}" Text="&#xE72C;" Margin="0,0,8,0" />
-                                            <TextBlock Text="Повторить" />
-                                        </StackPanel>
-                                    </Button>
-                                    <Button MinHeight="34" Margin="4,0,0,0" Command="{Binding ShowSiteAnywayCommand}"
-                                            Visibility="{Binding IsForbidden, Converter={StaticResource BoolToVis}}"
-                                            Content="Показать страницу" />
-                                </UniformGrid>
-                                <TextBlock Margin="0,14,0,0" Style="{StaticResource Caption}" FontSize="11"
-                                           Foreground="{StaticResource TextMutedBrush}"
-                                           Text="Track Hub не показывает демо-треки вместо сайта и не обходит защиту Hitmoz." />
-                            </StackPanel>
-                        </Border>
-                    </ScrollViewer>
-                </Grid>
+                <!-- Встроенный браузер работает только «под капотом» для поиска и скачивания.
+                     Сам сайт в программе не показывается (элемент 1×1 px, без кликов). -->
+                <Border Width="1" Height="1" HorizontalAlignment="Left" VerticalAlignment="Top" IsHitTestVisible="False" Focusable="False">
+                    <wv2:WebView2 x:Name="WebView" DefaultBackgroundColor="#FF16181D" IsHitTestVisible="False" Focusable="False" />
+                </Border>
 
                 <!-- Поиск -->
                 <views:SearchPage DataContext="{Binding Search}"

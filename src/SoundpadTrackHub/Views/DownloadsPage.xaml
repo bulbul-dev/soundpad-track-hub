@@ -118,7 +118,7 @@
                     <TextBlock Style="{StaticResource Icon}" Text="&#xE8D6;" FontSize="22" Foreground="{StaticResource TextMutedBrush}" HorizontalAlignment="Left" />
                     <TextBlock Margin="0,10,0,0" FontWeight="SemiBold" Text="Пока ничего не скачано" />
                     <TextBlock Margin="0,4,0,0" Style="{StaticResource Caption}"
-                               Text="Нажмите «Открыть Hitmoz», найдите трек на сайте и нажмите на сайте кнопку скачивания MP3. После подтверждения файл появится здесь." />
+                               Text="Найдите трек на вкладке «Поиск» и нажмите ⬇. После подтверждения файл появится здесь." />
                 </StackPanel>
             </Border>
 

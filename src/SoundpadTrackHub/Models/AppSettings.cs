@@ -41,6 +41,12 @@ namespace SoundpadTrackHub.Models
         /// <summary>Профиль громкости, который применится, когда Soundpad будет закрыт.</summary>
         public SoundpadVolumeProfile? PendingSoundpadProfile { get; set; }
 
+        /// <summary>Какую редакцию пользовательского соглашения принял пользователь (null — ещё не принимал).</summary>
+        public string? AcceptedAgreementVersion { get; set; }
+
+        /// <summary>Текущая редакция соглашения. При изменении текста — поменять, и соглашение покажется снова.</summary>
+        public const string AgreementVersion = "2026-11-13";
+
         public double WindowWidth { get; set; } = DefaultWidth;
         public double WindowHeight { get; set; } = DefaultHeight;
         public double? WindowLeft { get; set; }

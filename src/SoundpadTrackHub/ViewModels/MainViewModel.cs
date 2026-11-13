@@ -85,7 +85,7 @@ namespace SoundpadTrackHub.ViewModels
 
         public ReplaceViewModel Replace { get; }
 
-        public string Title => "Hitmoz • Soundpad";
+        public string Title => "Soundpad Track Hub";
 
         // ---------- Навигация ----------
 
@@ -237,12 +237,12 @@ namespace SoundpadTrackHub.ViewModels
 
         public string ConnectionText => BrowserState switch
         {
-            BrowserState.Ready => "Hitmoz открыт",
-            BrowserState.Loading => "Загрузка страницы…",
-            BrowserState.Initializing => "Запуск WebView2…",
+            BrowserState.Ready => "Поиск готов",
+            BrowserState.Loading => "Подключение…",
+            BrowserState.Initializing => "Запуск поиска…",
             BrowserState.RuntimeMissing => "WebView2 не найден",
             BrowserState.Forbidden => "HTTP 403",
-            BrowserState.Unavailable => "Сайт недоступен",
+            BrowserState.Unavailable => "Поиск недоступен",
             _ => "Не запущено",
         };
 
@@ -266,10 +266,8 @@ namespace SoundpadTrackHub.ViewModels
 
         private void OpenHitmoz()
         {
-            _ = Search.StopPlaybackAsync();
-            CurrentPage = AppPage.Browser;
-            ShowSiteAnyway = false;
-            _browser?.GoHome();
+            // Сайт в программе больше не показывается — открываем поиск.
+            CurrentPage = AppPage.Search;
         }
 
         // ---------- Загрузка ----------

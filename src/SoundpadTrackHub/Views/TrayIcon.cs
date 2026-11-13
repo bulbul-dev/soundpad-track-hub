@@ -37,7 +37,6 @@ namespace SoundpadTrackHub.Views
                 Renderer = new Forms.ToolStripProfessionalRenderer(new DarkColorTable()),
             };
             menu.Items.Add("Показать Track Hub", null, (_, _) => show());
-            menu.Items.Add("Открыть Hitmoz", null, (_, _) => openHitmoz());
             menu.Items.Add("Открыть папку загрузок", null, (_, _) => openFolder());
             menu.Items.Add(new Forms.ToolStripSeparator());
             menu.Items.Add("Выход", null, (_, _) => exit());

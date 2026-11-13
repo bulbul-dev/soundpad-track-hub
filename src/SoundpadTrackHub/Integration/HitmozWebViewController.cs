@@ -340,7 +340,7 @@ namespace SoundpadTrackHub.Integration
                 if (!await pending.Completion.Task)
                 {
                     throw new HitmozSearchException(State == BrowserState.Forbidden
-                        ? "Hitmoz ответил HTTP 403. Откройте вкладку «Сайт» — возможно, там нужна проверка, которую можно пройти вручную."
+                        ? "Hitmoz временно не отвечает на поиск (HTTP 403). Попробуйте ещё раз через несколько минут."
                         : "Сайт Hitmoz недоступен. Проверьте интернет и попробуйте ещё раз.");
                 }
             }
@@ -622,6 +622,20 @@ namespace SoundpadTrackHub.Integration
                 e.Cancel = true;
                 _dialogs.Info("Папка недоступна", "Не удалось открыть папку загрузок. Выберите другую папку в настройках.", $"{folder}\n{ex.Message}", DialogIcon.Warning);
                 return;
+            }
+
+            // Перед первой загрузкой — пользовательское соглашение. Без согласия скачивание недоступно.
+            if (_settings.Current.AcceptedAgreementVersion != AppSettings.AgreementVersion)
+            {
+                if (!_dialogs.ShowAgreement())
+                {
+                    e.Cancel = true;
+                    Message?.Invoke(this, "Загрузка отменена: без согласия с пользовательским соглашением скачивание недоступно.");
+                    return;
+                }
+
+                _settings.Update(s => s.AcceptedAgreementVersion = AppSettings.AgreementVersion);
+                _log.Information("User agreement {Version} accepted", AppSettings.AgreementVersion);
             }
 
             var source = request.SourceUri ?? op.Uri;
